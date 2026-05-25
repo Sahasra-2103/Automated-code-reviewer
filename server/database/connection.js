@@ -7,7 +7,7 @@ const connectDB = async () => {
   }
 
   if (!mongodbUri) {
-    const error = new Error('MONGODB_URI is not configured in the deployment environment.');
+    const error = new Error('MONGODB_URI is not configured. Please set MONGODB_URI environment variable in Vercel project settings.');
     error.status = 500;
     throw error;
   }
@@ -16,13 +16,18 @@ const connectDB = async () => {
     await mongoose.connect(mongodbUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 10000,
+      connectTimeoutMS: 10000,
+      maxPoolSize: 5,
+      minPoolSize: 1
     });
-    console.log('MongoDB connected');
+    console.log('MongoDB connected successfully');
   } catch (error) {
     console.error('MongoDB connection failed:', error.message);
-    error.status = 500;
-    throw error;
+    const connectionError = new Error(`Database connection failed: ${error.message}`);
+    connectionError.status = 503;
+    throw connectionError;
   }
 };
 

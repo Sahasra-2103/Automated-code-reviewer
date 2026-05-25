@@ -34,8 +34,8 @@ const parseJsonBody = async (req) => {
   }
 };
 
-const run = (handler) => (req, res) => (
-  new Promise((resolve, reject) => {
+const run = (handler) => async (req, res) => {
+  return new Promise((resolve, reject) => {
     const next = (error) => {
       if (error) {
         reject(error);
@@ -44,11 +44,15 @@ const run = (handler) => (req, res) => (
       resolve();
     };
 
-    Promise.resolve(handler(req, res, next))
-      .then(resolve)
-      .catch(reject);
-  })
-);
+    try {
+      Promise.resolve(handler(req, res, next))
+        .then(resolve)
+        .catch(reject);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 
 exports.createEndpoint = ({ methods, validators = [], handler, params = () => ({}) }) => async (req, res) => {
   res.setHeader('X-ACR-Api-Runtime', 'vercel-function');
@@ -73,7 +77,15 @@ exports.createEndpoint = ({ methods, validators = [], handler, params = () => ({
     }
 
     await run(handler)(req, res);
+    
+    // Ensure response is sent if handler doesn't send one
+    if (!res.headersSent) {
+      res.status(200).json({ success: true });
+    }
   } catch (error) {
-    errorMiddleware(error, req, res, () => {});
+    console.error('[API Error]', error.message);
+    if (!res.headersSent) {
+      errorMiddleware(error, req, res, () => {});
+    }
   }
 };
