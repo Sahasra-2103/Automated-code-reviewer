@@ -5,5 +5,5 @@ module.exports = createReviewService({
   apiKey: xaiApiKey,
   baseUrl: xaiBaseUrl,
   model: xaiModel,
-  providerName: 'xAI'
+  providerName: 'Grok'
 });

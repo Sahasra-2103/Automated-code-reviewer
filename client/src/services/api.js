@@ -5,6 +5,13 @@ const client = axios.create({
   headers: { 'Content-Type': 'application/json' }
 });
 
+export const getApiErrorMessage = (error) => {
+  return error.response?.data?.message
+    || error.response?.data?.error
+    || error.message
+    || 'Request failed. Please try again.';
+};
+
 export const reviewCode = async (payload) => {
   const response = await client.post('/review', payload);
   return response.data;

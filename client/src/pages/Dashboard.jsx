@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import Editor from '@monaco-editor/react';
-import { reviewCode } from '../services/api.js';
+import { getApiErrorMessage, reviewCode } from '../services/api.js';
 import { useLocalStorage } from '../hooks/useLocalStorage.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import ReviewScoreCard from '../components/ReviewScoreCard.jsx';
@@ -60,7 +60,7 @@ const Dashboard = () => {
       setRecentHistory((current) => [reviewPayload, ...current].slice(0, 6));
       setToast({ message: 'Code review completed successfully.', type: 'success' });
     } catch (error) {
-      setToast({ message: error.response?.data?.message || error.message, type: 'danger' });
+      setToast({ message: getApiErrorMessage(error), type: 'danger' });
     } finally {
       setLoading(false);
     }

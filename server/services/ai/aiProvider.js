@@ -10,8 +10,8 @@ const providers = {
 
 const resolveProviderKey = () => {
   if (aiProvider) return aiProvider;
-  if (groqApiKey) return 'groq';
   if (xaiApiKey) return 'xai';
+  if (groqApiKey) return 'groq';
   return 'groq';
 };
 

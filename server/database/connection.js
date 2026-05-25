@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const { mongodbUri } = require('../config');
 
 const connectDB = async () => {
-  if (!mongodbUri) {
-    console.error('MONGODB_URI is not configured.');
+  if (mongoose.connection.readyState === 1) {
     return;
+  }
+
+  if (!mongodbUri) {
+    const error = new Error('MONGODB_URI is not configured in the deployment environment.');
+    error.status = 500;
+    throw error;
   }
 
   try {
@@ -16,6 +21,8 @@ const connectDB = async () => {
     console.log('MongoDB connected');
   } catch (error) {
     console.error('MongoDB connection failed:', error.message);
+    error.status = 500;
+    throw error;
   }
 };
 

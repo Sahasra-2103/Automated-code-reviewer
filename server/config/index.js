@@ -7,6 +7,6 @@ module.exports = {
   xaiApiKey: process.env.XAI_API_KEY || process.env.GROK_API_KEY || '',
   xaiBaseUrl: process.env.XAI_BASE_URL || process.env.GROK_BASE_URL || 'https://api.x.ai/v1',
   xaiModel: process.env.XAI_MODEL || process.env.GROK_MODEL || 'grok-4.3',
-  aiProvider: process.env.AI_PROVIDER || '',
+  aiProvider: process.env.AI_PROVIDER || 'grok',
   corsOrigin: process.env.CORS_ORIGIN || '*'
 };
