@@ -3,7 +3,36 @@
   "installCommand": "npm run install:all",
   "buildCommand": "npm run build",
   "outputDirectory": "client/dist",
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "server/**"
+    }
+  },
   "routes": [
+    {
+      "src": "/api/debug",
+      "dest": "/api/debug.js"
+    },
+    {
+      "src": "/api/health",
+      "dest": "/api/health.js"
+    },
+    {
+      "src": "/api/review",
+      "dest": "/api/review.js"
+    },
+    {
+      "src": "/api/reviews",
+      "dest": "/api/reviews.js"
+    },
+    {
+      "src": "/api/analytics",
+      "dest": "/api/analytics.js"
+    },
+    {
+      "src": "/api/review/([^/]+)",
+      "dest": "/api/review/[id].js?id=$1"
+    },
     {
       "handle": "filesystem"
     },
