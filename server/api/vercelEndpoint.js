@@ -36,13 +36,17 @@ const parseJsonBody = async (req) => {
 
 const run = (handler) => (req, res) => (
   new Promise((resolve, reject) => {
-    handler(req, res, (error) => {
+    const next = (error) => {
       if (error) {
         reject(error);
         return;
       }
       resolve();
-    });
+    };
+
+    Promise.resolve(handler(req, res, next))
+      .then(resolve)
+      .catch(reject);
   })
 );
 
