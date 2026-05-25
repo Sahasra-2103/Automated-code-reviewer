@@ -91,7 +91,9 @@ exports.createReviewService = ({
     } catch (error) {
       const status = error.response?.status || 500;
       const errorData = error.response?.data?.error || error.response?.data;
-      const message = errorData ? (errorData.message || JSON.stringify(errorData)) : (error.message || `${providerName} API request failed`);
+      const message = errorData
+        ? String(errorData.message || JSON.stringify(errorData))
+        : String(error.message || `${providerName} API request failed`);
       console.error(`${providerName} API Error Detail:`, error.response?.data || error.message);
       const providerError = new Error(`${providerName} provider error (${status}): ${message}`);
       providerError.status = status;

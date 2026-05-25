@@ -6,10 +6,24 @@ const client = axios.create({
 });
 
 export const getApiErrorMessage = (error) => {
-  return error.response?.data?.message
+  const message = error.response?.data?.message
     || error.response?.data?.error
     || error.message
     || 'Request failed. Please try again.';
+
+  if (typeof message === 'string') {
+    return message;
+  }
+
+  if (message?.message) {
+    return String(message.message);
+  }
+
+  try {
+    return JSON.stringify(message);
+  } catch {
+    return 'Request failed. Please try again.';
+  }
 };
 
 export const reviewCode = async (payload) => {
