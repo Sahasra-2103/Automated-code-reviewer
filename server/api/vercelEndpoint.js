@@ -2,7 +2,20 @@ const connectDB = require('../database/connection');
 const errorMiddleware = require('../middleware/errorMiddleware');
 
 const parseJsonBody = async (req) => {
-  if (req.body !== undefined) return req.body;
+  if (req.body !== undefined) {
+    if (typeof req.body === 'string') {
+      if (!req.body.trim()) return {};
+      try {
+        return JSON.parse(req.body);
+      } catch (error) {
+        error.status = 400;
+        error.message = 'Request body must be valid JSON.';
+        throw error;
+      }
+    }
+
+    return req.body;
+  }
 
   const chunks = [];
   for await (const chunk of req) {
