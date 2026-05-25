@@ -27,6 +27,15 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'Automated Code Reviewer API' });
 });
 
+app.use('/api', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'API endpoint not found',
+    method: req.method,
+    path: req.originalUrl
+  });
+});
+
 app.use(errorMiddleware);
 
 if (require.main === module) {
