@@ -1,0 +1,100 @@
+.issues-card {
+  display: grid;
+  gap: 16px;
+}
+
+.card-header-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.card-header-action button {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: all var(--transition-fast);
+}
+
+.card-header-action button:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.issue-list {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.issue-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  background: var(--surface-solid);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  min-width: 0;
+}
+
+.issue-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.issue-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+}
+
+.issue-danger::before { background: var(--danger); }
+.issue-warning::before { background: var(--warning); }
+.issue-info::before { background: var(--primary); }
+
+.issue-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.issue-severity {
+  font-weight: 800;
+}
+
+.issue-item.issue-danger { border-color: var(--danger-soft); background: linear-gradient(to right, var(--danger-soft), transparent); }
+.issue-item.issue-warning { border-color: var(--warning-soft); background: linear-gradient(to right, var(--warning-soft), transparent); }
+.issue-item.issue-info { border-color: var(--primary-soft); background: linear-gradient(to right, var(--primary-soft), transparent); }
+
+.issue-problem {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.issue-impact {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.issue-solution {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

@@ -1,0 +1,25 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto 48px;
+  padding-top: 28px;
+  animation: fadeIn var(--transition-bounce) forwards;
+  min-width: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 800px) {
+  .content-container {
+    width: calc(100% - 24px);
+    padding-top: 24px;
+  }
+}

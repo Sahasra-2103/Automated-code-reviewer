@@ -1,0 +1,25 @@
+.toast-message {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+  animation: slideIn var(--transition-bounce) forwards;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(50px) scale(0.9); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.toast-success { background: linear-gradient(135deg, var(--success) 0%, #059669 100%); }
+.toast-warning { background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%); }
+.toast-danger { background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%); }
+.toast-info { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); }

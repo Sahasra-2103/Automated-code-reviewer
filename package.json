@@ -1,0 +1,13 @@
+{
+  "name": "automated-code-reviewer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Full-stack AI-powered code review application",
+  "scripts": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "start": "npm run start --prefix server"
+  },
+  "license": "MIT"
+}
