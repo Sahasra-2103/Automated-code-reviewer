@@ -4,10 +4,17 @@
   "version": "1.0.0",
   "description": "Full-stack AI-powered code review application",
   "scripts": {
-    "install:all": "npm install --prefix client && npm install --prefix server",
+    "install:all": "npm install && npm install --prefix client && npm install --prefix server",
     "dev": "npm run dev --prefix client",
     "build": "npm run build --prefix client",
     "start": "npm run start --prefix server"
+  },
+  "dependencies": {
+    "axios": "^1.6.4",
+    "dotenv": "^16.3.1",
+    "joi": "^17.9.2",
+    "mongoose": "^7.5.1",
+    "validator": "^13.9.0"
   },
   "license": "MIT"
 }

@@ -6,6 +6,7 @@
       "src": "api/**/*.js",
       "use": "@vercel/node",
       "config": {
+        "maxDuration": 60,
         "includeFiles": [
           "server/**"
         ]
